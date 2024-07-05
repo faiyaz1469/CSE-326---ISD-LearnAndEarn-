@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- head -->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+<body class="container parent">
+
+  <!-- navbar -->
+  <div th:replace="../fragments/navbar">This content will be gone</div>
+  
+  <main class="main">
+  <h1 class="mb-4 display-6 text-success p-2"><b>Please Write Your Answer</b></h1>
+
+    <!--========== body ===========-->
+    <!-- Page Content -->
+    <div class="container">
+
+
+        <form action="#" 
+              th:action="@{/courses/quesans/edit/{id}(id=${quesans.id})}" 
+              th:object="${quesans}" 
+              id="form2"
+              class="mx-auto w-50 p-5 shadow bg-light rounded form-horizontal" 
+              method="POST">
+      
+          <fieldset>
+          
+            <!-- Form Name -->
+            <legend>Q&A Form</legend>
+
+            <div class="form-group mb-4" hidden>
+                <label for="id">Id</label>
+                <input type="text" name="id" id="id" class="form-control" th:field="*{id}">
+                <!-- <input type="text" name="firstname" id="firstname" class="form-control"> -->
+              </div>
+
+              <div class="form-group mb-4">
+                <label class="col-md-4 control-label" for="quesdescription">Question</label>                  
+                <textarea class="form-control" id="quesdescription" name="quesdescription" th:field="*{quesdescription}" readonly></textarea>
+        
+              </div>
+
+              <div class="form-group mb-4">
+                <label class="col-md-4 control-label" for="ansdescription">Answer</label>                  
+                <textarea class="form-control" id="ansdescription" name="ansdescription" th:field="*{ansdescription}" required autofocus></textarea>
+                </div>
+
+
+            <div class="form-group mb-4" hidden>
+                <label class="col-md-4 control-label" for="revname">Learner's Name</label>  
+                <input id="revname" name="revname" type="text" placeholder="Anynomous" class="form-control input-md" th:field="*{revname}" readonly>
+              </div>
+            
+        
+            
+
+            <div class="form-group mb-4" hidden>
+              <label class="col-md-4 control-label" for="name">Course Name</label>  
+              <input id="name" name="name" type="text" class="form-control input-md" th:field="*{name}" readonly>
+            </div>
+          
+            <div class="form-group mb-4" hidden>
+              <label class="col-md-4 control-label" for="subject">Subject</label>  
+              <input id="subject" name="subject" type="text" class="form-control input-md" th:field="*{subject}" readonly>
+            </div>
+
+            <div class="form-group mb-4" hidden>
+                <label class="col-md-4 control-label" for="firstName">Teacher FirstName</label>  
+                <input id="firstName" name="firstName" type="text" class="form-control input-md" th:field="*{firstName}" readonly>
+              </div>
+            
+              <div class="form-group mb-4" hidden>
+                <label class="col-md-4 control-label" for="email">Teacher Email</label>  
+                <input id="email" name="email" type="text" class="form-control input-md" th:field="*{email}" readonly>
+              </div>
+
+
+              
+          
+          </fieldset>
+      
+          <div class="form-group mb-4">
+            <button type="submit" class="btn btn-sm btn-danger btn-block form-control">Publish Answer</button>
+          </div>
+      
+          <!--div>
+            <p>Back to Course <a href="#" th:href="@{/courses/{id}(id=${course.id})}">Page</a></p>
+          </div-->
+      
+        </form>
+          
+      
+      </div>
+    <!-- /.container -->
+
+   </main>
+
+   <!--========== Footer ===========-->
+   <div th:replace="../fragments/footer">This content will be gone</div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

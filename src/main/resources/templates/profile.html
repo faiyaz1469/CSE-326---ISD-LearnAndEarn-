@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--========== head ===========-->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+
+<!--========== Main Body ===========-->
+<body class="container parent">
+	<!--========== navbar ===========-->
+	    <div th:replace="../fragments/navbar">This content will be gone</div>
+
+      <main class="main">
+        <div class="row">
+
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                  <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h4 th:text="${account.firstName} + ' ' + ${account.lastName}">Full Name</h4>
+                    <p class="text-muted font-size-sm" th:text="${account.email}">Email</p>
+                    <!--button class="btn btn-primary">Follow</button>
+                    <button class="btn btn-outline-primary">Message</button-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-8">
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <span th:text="${account.firstName} + ' ' + ${account.lastName}"></span>
+                  </div>
+                </div>
+                <hr>
+                
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    <span th:text="${account.email}">Email</span>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Role</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                  <!--td>
+                      <span th:if="${teacher.gender == 'F'}">Female</span>
+                      <span th:unless="${teacher.gender == 'F'}">Male</span>
+                  </td-->
+                    <!--span th:if="${account.role.name == 'ROLE_ADMIN'}">Teacher</span>
+                    <span th:unless="${account.role.name == 'ROLE_ADMIN'}">Learner</span-->
+                    
+                   
+
+                  <td th:switch="${account.role.name}">
+                    <span th:case="'ROLE_SUPERADMIN'" >Admin</span>
+                    <span th:case="'ROLE_ADMIN'">Teacher</span>
+                    <span th:case="'ROLE_USER'" >Learner</span>
+                      <!--div th:case="*">
+                          <div th:each="course:${teacher.courses}" th:text="${course}"/>
+                      </div-->
+                  </td>
+
+                    
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-12">
+                    <a class="btn btn-info" href="#" th:href="@{/profile-edit}">Edit</a>
+                    <!-- 
+                    <form action="" th:action="@{/profile-edit}">
+                        <button type="submit" class="btn btn-info">Edit</button>
+                    </form> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+      
+  <!--========== Footer ===========-->
+  <div th:replace="../fragments/footer">This content will be gone</div>
+  
+</body>

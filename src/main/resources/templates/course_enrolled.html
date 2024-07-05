@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--========== head ===========-->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+<!--========== body ===========-->
+<body class="container parent">
+    <div th:replace="../fragments/navbar">This content will be gone</div>
+
+    <main class="main">
+
+      <div class="row">
+
+        <div class="col col-md">
+          <h3 class="display-6 text-primary" ><b>Enrolled Learner List</b></h3>
+          <hr>
+          
+          <div th:if="${learnempty == 'yes'}"> 
+            <small><h3 class=" display-6 text-success p-3">No one Enrolled Yet</h3></small>
+          </div>
+      
+          <div th:unless="${learnempty == 'yes'}">
+
+          <div class="">
+            <table class="shadow-sm table table-striped table-bordered table-hover">
+              <thead class="table-dark">
+                <tr>
+                  <th>Id</th>
+                  <th>First Name</th>
+                  
+                  <th>Email</th>
+                  <th>Course Title</th>
+                  <th>Subject</th>
+                  <th>Price</th>
+                  <th>Payment Method</th>
+                  <!--th>Total Cost</th-->
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="traveller: ${travellers}">
+                  <td th:text="${traveller.id}"></td>
+                  <td th:text="${traveller.firstName}"></td>
+                  
+                  <td th:text="${traveller.email}"></td>
+                  <td th:text="${traveller.name}"></td>
+                  <td th:text="${traveller.subject}"></td>
+                  <td th:text="${traveller.price}"></td>
+                  <td th:text="${traveller.method}"></td>
+                  <!--td th:text="${traveller.totalcost}"></td-->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          </div> 
+
+      </div>
+    <main>
+
+      <!--========== Footer ===========-->
+      <!--div th:replace="../fragments/footer">This content will be gone</div-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

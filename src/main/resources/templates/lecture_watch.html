@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- head -->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+<body class="container parent">
+
+  <!-- navbar -->
+  <div th:replace="../fragments/navbar">This content will be gone</div>
+  
+  <main class="main">
+  <b><h1 class="mb-4 display-6 text-success" th:text="'Watch the Lecture ' + ${lecture.title}">Watch Lecture</h1></b>
+
+    <div class="container">
+    </div>
+      
+    <!--video width="400" controls>
+        <source src="" th:src="${lecture.link}" type="video/mp4">
+        Your browser does not support HTML video.
+    </video-->
+
+    <iframe src="" th:src="${lecture.link}" width="960" height="640" allow="autoplay"></iframe>
+    
+    
+      <!--div>
+        <p>Add Another <a href="#" th:href="@{/courses/add}">Course</a></p>
+      </div-->
+
+    
+  </main>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

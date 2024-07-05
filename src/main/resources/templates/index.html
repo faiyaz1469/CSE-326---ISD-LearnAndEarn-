@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--========== head ===========-->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+
+<!--========== Main Body ===========-->
+<body class="container parent">
+	<!--========== navbar ===========-->
+	<div th:replace="../fragments/navbar">This content will be gone</div>
+
+	<main class="main">
+		<section class="main-section">
+			
+			<section class="block-1">
+				<div class="block-1-title">
+					<h4><span>Featured Courses</span></h4>
+				</div>
+				
+				<div class="block-1a">
+					<div class="block-1a-content">
+						<a href="#" th:href="@{/courses/{id}(id=${course.id})}"><img src="../images/gravity2.jpg" th:src="@{images/gravity2.jpg}"></a>
+					</div>
+					<div class="block-1a-headline">
+						<a href="#" th:href="@{/courses/{id}(id=${course.id})}" class="text-black" ><h3 class=" text-black">Gravity, Physics -
+							2 Lectures</h3></a>
+					</div>
+				</div>
+				<div class="block-1b">
+					<div class="block-1b-content">
+						<a href="#" th:href="@{/courses/{id}(id=${course5.id})}" ><img src="../images/bonds.jpg" th:src="@{images/bonds.jpg}"></a>
+					</div>
+					<div class="block-1b-headline">
+						<a href="#" th:href="@{/courses/{id}(id=${course5.id})}" class="text-white"><p class=" text-white">Chemical Bonds, Chemistry</p></a>
+					</div>
+				</div>
+				<div class="block-1c">
+					<div class="block-1c-content">
+						<a href="#" th:href="@{/courses/{id}(id=${course6.id})}" ><img src="../images/genetics.webp"  th:src="@{images/genetics.webp}"></a>
+					</div>
+					<div class="block-1c-headline">
+						<a href="#" th:href="@{/courses/{id}(id=${course6.id})}" class="text-white"><p class=" text-white">Genetics, Biology</p></a>
+					</div>
+				</div>
+				
+				<div class="block-1d">
+					<div class="block-1d-content">
+						<a href="#" th:href="@{/courses/{id}(id=${course4.id})}" ><img src="../images/web.jpg" th:src="@{images/web.jpg}"></a>
+					</div>
+					<div class="block-1d-headline">
+						<a href="#" th:href="@{/courses/{id}(id=${course4.id})}" class="text-white"><p class=" text-white">Java, Programming</p></a>
+					</div>
+					
+				</div>
+				<div class="block-1e">
+					<div class="block-1e-content">
+						<a href="#" th:href="@{/courses/{id}(id=${course2.id})}" ><img src="../images/probability.jpg" th:src="@{images/probability.jpg}"></a>
+					</div>
+					<div class="block-1e-headline">
+						<a href="#" th:href="@{/courses/{id}(id=${course2.id})}" class="text-white"><p class=" text-white">Probability, Mathematics</p></a>
+					</div>
+				</div>
+				<div class="block-1f">
+					<div class="block-1f-content">
+						<a href="#" th:href="@{/courses/{id}(id=${course3.id})}" ><img src="../images/elasticity.jpg" th:src="@{images/elasticity.jpg}"></a>
+					</div>
+					<div class="block-1f-headline">
+						<a href="#" th:href="@{/courses/{id}(id=${course3.id})}" class="text-white"><p class=" text-white">Elasticity, Physics</p></a>
+					</div>
+				</div>
+				
+				
+			</section>
+
+          <section sec:authorize="hasRole('ROLE_USER')">
+			
+			<div class="my-4 block-1-title">
+				<h4><span>Enrolled Courses</span></h4>
+			</div>
+
+			<div th:if="${crsempty == 'yes'}"> 
+				<small><h3 class=" display-6 text-success p-3">You Haven't Enrolled in Any Course</h3></small>
+			</div>
+		  
+			<div th:unless="${crsempty == 'yes'}"> 
+
+			<div class="container">
+				<!-- card begins -->
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+				
+				<div th:each="course: ${courses}">
+
+					<div class="col">
+					<div class="card">
+						<img src="" th:src="${course.image}" width="400" height="300" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+						
+						<div class="card-body">
+							<h5 class="card-title"th:text="${course.name}">Card title</h5>
+							<b><p class="card-text text-black p-2" th:text="'Course Teacher: ' + ${course.firstName}">
+							  This is a longer card with supporting text below as a natural lead-in to
+							  additional content. This content is a little bit longer.
+							</p></b>
+							<b><i><p class="card-text text-info p-2" th:text="'Level: ' + ${course.level}">
+							  This is a longer card with supporting text below as a natural lead-in to
+							  additional content. This content is a little bit longer.
+							</p></i></b>
+						  </div>
+
+						<div class="card-footer">
+						<!--small class="text-muted" th:text="${place.location}">Last updated 3 mins ago</small-->
+						<small><a href="" th:text="${course.Subject}" th:href="@{/courses/specific/{id}(id=${course.id})}" class="btn btn-success">Subject</a></small>
+						<small><a href="" th:text="${course.firstName}" th:href="@{/courses/teacher/{id}(id=${course.id})}" class="btn btn-success">Course Teacher</a></small>
+						<small><a href="" th:href="@{/courses/{id}(id=${course.id})}" class="btn btn-warning my-2">Explore</a></small> 
+						</div>
+
+					</div>
+					</div>
+
+				</div>
+
+				</div>
+				<!-- card ends -->
+
+			  </div>
+			
+			</div>
+
+			</section>
+
+
+			<section sec:authorize="hasRole('ROLE_USER')">
+			
+				<div class="my-4 block-1-title">
+					<h4><span>Your Assignments</span></h4>
+				</div>
+	
+				<div th:if="${assempty == 'yes'}"> 
+					<small><h3 class=" display-6 text-success p-3">You Have No Assignments</h3></small>
+				</div>
+			  
+				  <div th:unless="${assempty == 'yes'}"> 
+			
+					<div class="row">
+						<div class="col col-md">
+						 
+							<table class="shadow-sm table table-striped table-bordered table-hover">
+								<thead class="table-dark">
+									<tr>
+									  <th>Id</th>
+									  <th>Assignment Name</th>
+									  <th>Description</th>
+									  <th>Course Name</th>
+									  <th>Subject</th>
+									  <th>Open Assignment</th>
+									  <!--th>Submit Assignment</th-->
+							
+									</tr>
+								  </thead>
+								  <tbody>
+									<tr th:each="assignment: ${assignments}">
+									  <td th:text="${assignment.id}"></td>
+									  <td th:text="${assignment.title}"></td>
+									  <td th:text="${assignment.description}"></td>
+									  <td th:text="${assignment.name}"></td>
+									  <td th:text="${assignment.subject}"></td>
+									  <td>
+										<a class="btn btn-sm btn-info d-inline" th:href="@{/courses/assignment/open/{id}(id=${assignment.id})}">Open</a>
+									   
+									  </td>
+			
+									  <!--td>
+										<a sec:authorize = "hasRole('ROLE_USER')" class="btn btn-sm btn-info d-inline" th:href="@{/files/submission/{id}(id=${assignment.id})}">Submit</a>
+										
+									  </td-->
+							  
+									</tr>
+								  </tbody>
+							
+							</table>
+						 
+			
+					  </div>
+					
+					</div>
+			
+				  </div>
+	
+			</section>
+
+
+
+			<section sec:authorize="hasRole('ROLE_USER')">
+			
+				<div class="my-4 block-1-title">
+					<h4><span>Pending Assignments</span></h4>
+				</div>
+	
+				<div th:if="${pendassempty == 'yes'}"> 
+					<small><h3 class=" display-6 text-success p-3">You Have No Pending Assignments</h3></small>
+				</div>
+			  
+				  <div th:unless="${pendassempty == 'yes'}"> 
+			
+					<div class="row">
+						<div class="col col-md">
+						  <div class="">
+							<table class="shadow-sm table table-striped table-bordered table-hover">
+								<thead class="table-dark">
+									<tr>
+									  <th>Id</th>
+									  <th>Assignment Name</th>
+									  <th>Description</th>
+									  <th>Course Name</th>
+									  <th>Subject</th>
+									  <th>Open Assignment</th>
+									  <th>Submit Assignment</th>
+							
+									</tr>
+								  </thead>
+								  <tbody>
+									<tr th:each="assignment: ${pendassignments}">
+									  <td th:text="${assignment.id}"></td>
+									  <td th:text="${assignment.title}"></td>
+									  <td th:text="${assignment.description}"></td>
+									  <td th:text="${assignment.name}"></td>
+									  <td th:text="${assignment.subject}"></td>
+									  <td>
+										<a class="btn btn-sm btn-info d-inline" th:href="@{/courses/assignment/open/{id}(id=${assignment.id})}">Open</a>
+									   
+									  </td>
+			
+									  <td>
+										<a sec:authorize = "hasRole('ROLE_USER')" class="btn btn-sm btn-info d-inline" th:href="@{/files/submission/{id}(id=${assignment.id})}">Submit</a>
+										
+									  </td>
+							  
+									</tr>
+								  </tbody>
+							
+							</table>
+						  </div>
+			
+					  </div>
+					
+					</div>
+			
+				  </div>
+	
+			</section>
+
+
+			<section sec:authorize="hasRole('ROLE_USER')">
+			
+				<div class="my-4 block-1-title">
+					<h4><span>Submitted Assignments</span></h4>
+				</div>
+	
+				<div th:if="${assempty2 == 'yes'}"> 
+					<small><h3 class=" display-6 text-success p-3">Hurry Up!! You Didn't Submit Any Assignment</h3></small>
+				</div>
+			  
+				  <div th:unless="${assempty2 == 'yes'}"> 
+			
+					<div class="row">
+						<div class="col col-md">
+						  <div class="">
+							<table class="shadow-sm table table-striped table-bordered table-hover">
+								<thead class="table-dark">
+									<tr>
+									  <th>Id</th>
+									  <th>Assignment Name</th>
+									  <th>Description</th>
+									  <th>Course Name</th>
+									  <th>Subject</th>
+									  
+									  <th>Obtained Marks</th>
+									  <!--th>Open Assignment</th>
+									  <th>Submit Assignment</th-->
+							
+									</tr>
+								  </thead>
+								  <tbody>
+									<tr th:each="submission: ${allsubmissions}">
+									  <td th:text="${submission.id}"></td>
+									  <td th:text="${submission.title}"></td>
+									  <td th:text="${submission.description}"></td>
+									  <td th:text="${submission.name}"></td>
+									  <td th:text="${submission.subject}"></td>
+
+
+									  <div th:if="${submission.mark == null}"> 
+										<td>Not Yet Evaluated</td>
+										
+									  </div>
+								  
+									  <div th:unless="${submission.mark == null}"> 
+										<td th:text="${submission.mark}"></td>
+									  </div>
+
+									 
+									  <!--td>
+										<a class="btn btn-sm btn-info d-inline" th:href="@{/courses/assignment/open/{id}(id=${assignment2.id})}">Open</a>
+									  </td-->
+									  
+			
+									  <!--td>
+										<a sec:authorize = "hasRole('ROLE_USER')" class="btn btn-sm btn-info d-inline" th:href="@{/files/submission/{id}(id=${assignment2.id})}">Submit</a>
+										
+									  </td-->
+							  
+									</tr>
+								  </tbody>
+							
+							</table>
+						  </div>
+			
+					  </div>
+					
+					</div>
+			
+				  </div>
+	
+			</section>
+
+
+
+
+			<section sec:authorize="hasRole('ROLE_ADMIN')">
+			
+				<div class="my-4 block-1-title">
+					<h4><span>Your Courses</span></h4>
+				</div>
+
+				<div th:if="${crsempty2 == 'yes'}"> 
+					<small><h3 class=" display-6 text-success p-3">You Haven't Created Any Course</h3></small>
+				</div>
+			  
+				<div th:unless="${crsempty2 == 'yes'}">
+	
+				<div class="container">
+					<!-- card begins -->
+					<div class="row row-cols-1 row-cols-md-3 g-4">
+					
+					<div th:each="course: ${courses2}">
+	
+						<div class="col">
+						<div class="card">
+							<img src="" th:src="${course.image}" width="400" height="300" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+							
+							<div class="card-body">
+								<h5 class="card-title"th:text="${course.name}">Card title</h5>
+								<b><p class="card-text text-black p-2" th:text="'Course Teacher: ' + ${course.firstName}">
+								  This is a longer card with supporting text below as a natural lead-in to
+								  additional content. This content is a little bit longer.
+								</p></b>
+								<b><i><p class="card-text text-info p-2" th:text="'Level: ' + ${course.level}">
+								  This is a longer card with supporting text below as a natural lead-in to
+								  additional content. This content is a little bit longer.
+								</p></i></b>
+							  </div>
+	
+							<div class="card-footer">
+							<!--small class="text-muted" th:text="${place.location}">Last updated 3 mins ago</small-->
+							<small><a href="" th:text="${course.Subject}" th:href="@{/courses/specific/{id}(id=${course.id})}" class="btn btn-success">Subject</a></small>
+							<small><a href="" th:text="${course.firstName}" th:href="@{/courses/teacher/{id}(id=${course.id})}" class="btn btn-success">Course Teacher</a></small>
+							<small><a href="" th:href="@{/courses/{id}(id=${course.id})}" class="btn btn-warning">Explore</a></small>
+							<small><a href="" th:href="@{/courses/delete/{id}(id=${course.id})}" class="btn btn-danger my-2">Delete</a></small> 
+							</div>
+	
+						</div>
+						</div>
+	
+					</div>
+	
+					</div>
+					<!-- card ends -->
+	
+				  </div>
+				</div>
+	
+				</section>
+
+
+
+
+                <section sec:authorize="hasRole('ROLE_ADMIN')">
+			
+					<div class="my-4 block-1-title">
+						<h4><span>Evaluate Submissions</span></h4>
+					</div>
+					
+					<div th:if="${subempty == 'yes'}"> 
+						<small><h3 class=" display-6 text-success p-3">You have No Submissions to Evaluate !!</h3></small>
+					</div>
+				  
+					  <div th:unless="${subempty == 'yes'}"> 
+					  
+							<div class="">
+								<table class="shadow-sm table table-striped table-bordered table-hover">
+								<thead class="table-dark">
+									<tr>
+									<th>Id</th>
+									<th>First Name</th>              
+									<th>Email</th>
+									<th>Assignment Title</th>
+									<th>Course Name</th>
+									<th>Subject</th>
+									<th>Check Assignment</th>
+									<!--th>Given Marks</th-->
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="submission: ${submissions}">
+									<td th:text="${submission.id}"></td>
+									<td th:text="${submission.firstName}"></td>
+									
+									<td th:text="${submission.email}"></td>
+									<td th:text="${submission.title}"></td>
+									<td th:text="${submission.name}"></td>
+									<td th:text="${submission.subject}"></td>
+									<td>
+										<a class="btn btn-sm btn-info d-inline" th:href="@{/assignment/submission/view/{id}(id=${submission.id})}">View</a>
+									</td>
+									<!--td th:text="${submission.mark}"></td-->
+									</tr>
+								</tbody>
+								</table>
+							</div>
+			
+						</div>
+					
+		
+				</section>
+
+
+
+
+				<section sec:authorize="hasRole('ROLE_ADMIN')">
+					<div class="block-2-title">
+						<h4><span>Unanswered Questions</span></h4>
+					</div>
+
+					<div th:if="${qaempty == 'yes'}"> 
+						<small><h3 class=" display-6 text-success p-3">Great Job ! No Unanswered Questions</h3></small>
+					</div>
+				  
+					<div th:unless="${qaempty == 'yes'}"> 
+						
+						<div class="container">
+							
+							<!-- card begins -->
+							<div class="row row-cols-1 row-cols-md-3 g-4">
+							  
+							  <div th:each="quesans: ${quesanss}">
+					
+								<div class="col">
+					
+								  <div class="card">
+									<!--img src="" width="400" height="300" class="card-img-top" alt="Hollywood Sign on The Hill"-->
+									
+									<div class="card-body">
+					
+									  <h5 class="card-title" th:text="'Ques by ' + ${quesans.revname}">Learner Name</h5>
+					
+									  <p class="card-text" th:text="'Question- ' + ${quesans.quesdescription}">
+										This is a small test.
+									  </p>
+					
+									  <p class="card-text" th:text="'Answer- ' + ${quesans.ansdescription}">
+										This is a longer card with supporting text below as a natural lead-in to
+										additional content. This content is a little bit longer.
+									  </p>
+					
+									</div> 
+					
+									  <div class="card-footer">
+										<small class="btn btn-danger" >Unanswered</small>
+										<small><a href="" th:href="@{/courses/quesans/edit/{id}(id=${quesans.id})}" sec:authorize = "hasRole('ROLE_ADMIN')" class="btn btn-warning">Give Answer</a></small>                
+									  </div>
+					
+								  </div>
+					
+								</div>
+					
+							  </div>
+					
+							</div>
+							<!-- card ends -->
+					
+						</div>
+
+					</div>
+				
+				</section>
+
+
+
+			<section sec:authorize="hasRole('ROLE_SUPERADMIN')">
+				
+				<div class="mb-4 my-4 block-2-title">
+					<h4><span>Reviews</span></h4>
+				</div>
+				<div class="container">
+					<!-- card begins -->
+					<div class="row row-cols-1 row-cols-md-3 g-4">
+					  
+					  <div th:each="blog: ${blogs}">
+			
+						<div class="col">
+			
+						  <div class="card">
+							<!--img src="" width="400" height="300" class="card-img-top" alt="Hollywood Sign on The Hill"-->
+							
+							<div class="card-body">
+			
+							  <h5 class="card-title" th:text="${blog.title}">Card title</h5>
+			
+							  <p class="card-text" th:text="${blog.revname}">
+								This is a small test.
+							  </p>
+			
+							  <p class="card-text" th:text="${blog.description}">
+								This is a longer card with supporting text below as a natural lead-in to
+								additional content. This content is a little bit longer.
+							  </p>
+			
+							</div>
+			
+							<div class="card-footer">
+							  <small class="text-muted" th:text="${blog.name} +', ' +${blog.subject}">3 Min Read</small>
+							</div>
+			
+						  </div>
+			
+						</div>
+			
+					  </div>
+			
+					</div>
+					<!-- card ends -->
+			
+				  </div>
+			
+			
+			</section>
+
+			<section sec:authorize="hasRole('ROLE_SUPERADMIN')"> 
+				<div class="mb-4 my-4 block-2-title">
+					<h4><span>Enrolled Learner List</span></h4>
+				</div>
+				<div class="">
+					<table class="shadow-sm table table-striped table-bordered table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th>Id</th>
+								<th>First Name</th>
+								<th>Email</th>
+								<th>Course Title</th>
+								<th>Subject</th>
+								<th>Price</th>
+								<th>Payment Method</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="traveller: ${travellers}">
+								<td th:text="${traveller.id}"></td>
+								<td th:text="${traveller.firstName}"></td>                  
+								<td th:text="${traveller.email}"></td>
+								<td th:text="${traveller.name}"></td>
+								<td th:text="${traveller.subject}"></td>
+								<td th:text="${traveller.price}"></td>
+								<td th:text="${traveller.method}"></td>
+							  </tr>
+						</tbody>
+					</table>
+				</div>
+			
+			</section>
+
+
+		</section>
+
+		<!--video width="400" controls>
+			<source src="../videos/pres.mp4" th:src="@{videos/pres.mp4}" type="video/mp4">
+			
+			Your browser does not support HTML video.
+		  </video-->
+
+	</main>
+
+	<!--========== Footer ===========-->
+	<div th:replace="../fragments/footer">This content will be gone</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

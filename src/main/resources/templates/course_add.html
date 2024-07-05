@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- head -->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+<body class="container parent">
+
+  <!-- navbar -->
+  <div th:replace="../fragments/navbar">This content will be gone</div>
+  
+  <main class="main">
+  
+    <h1 class="mb-4 display-6 text-success p-2"><b>Course to Create</b></h1>
+
+    <!--========== body ===========-->
+    <!-- Page Content -->
+    <div class="container">
+
+      <form action="#" 
+            th:action="@{/courses/add}" 
+            th:object="${course}" 
+            class="mx-auto w-50 p-5 shadow bg-light rounded form-horizontal" 
+            method="POST">
+
+        <fieldset>
+        
+          <!-- Form Name -->
+          <legend>Course Creation Form</legend>
+          
+          <!-- Text input-->
+          <div class="form-group mb-4">
+            <label class="col-md-4 control-label" for="name">Course Name</label>  
+            <input id="name" name="name" type="text" placeholder="e.g. Gravity, Algorithm" class="form-control input-md" th:field="*{name}" required autofocus>
+          </div>
+          
+          <!-- Text input-->
+          <div class="form-group mb-4">
+            <label class="col-md-4 control-label" for="subject">Subject</label>  
+            <input id="subject" name="subject" type="text" placeholder="e.g. Physics, CSE" class="form-control input-md" th:field="*{subject}" required>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group mb-4" hidden>
+            <label class="col-md-4 control-label" for="firstName">Course Teacher</label>  
+            <input id="firstName" name="firstName" type="text" class="form-control input-md" th:field="${account.firstName}" readonly>
+          </div>
+          
+          <!-- Text input-->
+          <div class="form-group mb-4" hidden>
+            <label class="col-md-4 control-label" for="email">Email</label>  
+            <input id="email" name="email" type="text" class="form-control input-md" th:field="${account.email}" readonly>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group mb-4">
+            <label class="col-md-4 control-label" for="description">Description</label>  
+            <textarea id="description" name="description" class="form-control" th:field="*{description}" required></textarea>
+          </div>
+
+          
+          <!--div class="form-group mb-4">
+            <label class="col-md-4 control-label" for="level">Level</label>  
+            <input id="level" name="level" type="text" placeholder="e.g. Beginner, Intermediate" class="form-control input-md" th:field="*{level}">
+          </div-->
+
+          <div class="form-group mb-4">
+            <label class="col-md-4 control-label" for="price">Set Price</label>  
+            <input id="price" name="price" type="number" placeholder="1000" class="form-control input-md" th:field="*{price}" required>
+          </div>
+          
+          <div class="form-group mb-4">
+            <label class="col-md-4 control-label" for="image">Cover Photo</label>  
+            <input id="image" name="image" type="url" placeholder="Image URL" class="form-control input-md" th:field="*{image}" required>
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="level">Level</label>
+  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="level" name="level" th:text="Beginner" value="Beginner" checked>
+            </div>
+  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="level" name="level" th:text="Intermediate" value="Intermediate" >
+            </div>
+  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="level" name="level" th:text="Master" value="Master">
+            </div>
+            
+          </div>
+
+          <!--div class="form-group mb-4">
+            <label class="col-md-4 control-label" for="image">Cover Photo</label>  
+            <input id="image" name="image" type="file" class="form-control input-md" th:field="*{image}" required>
+          </div-->
+
+        </fieldset>
+
+        <div class="form-group mb-4">
+          <button type="submit" class="btn btn-sm btn-info btn-block form-control">Create</button>
+        </div>
+
+        <!--div>
+          <p>Back To <a href="#" th:href="@{/}">Main</a></p>
+        </div-->
+        
+      </form>
+        
+
+    </div>
+  <!-- /.container -->
+
+</main>
+
+<!--========== Footer ===========-->
+<div th:replace="../fragments/footer">This content will be gone</div>
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

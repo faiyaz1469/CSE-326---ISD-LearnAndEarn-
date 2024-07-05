@@ -1,0 +1,44 @@
+	
+	<header class="header">
+		<div class="topheader">
+			<h2><span class="s1 text-warning">LEARN </span> <span class="s1 text-success">& </span> <span class="s2 text-info">EARN</span></h2>
+		</div>
+
+		<nav class="menubar">
+			<ul>
+				<li class="bg-dark"><a href="#" th:href="@{/}">Home</a></li>
+
+				<li class="bg-warning"><a href="#" th:href="@{/courses}">Courses<i class="down-arrow"></i>
+					<ul>
+						<li><a href="#"th:href="@{/courses/mathematics}">Mathematics<i class="down-arrow"></i></a></li>
+						<li><a href="#" th:href="@{/courses/physics}">Physics<i class="down-arrow"></i></a></li>
+						<li><a href="#" th:href="@{/courses/chemistry}">Chemistry<i class="down-arrow"></i></a></li>
+						<li><a href="#" th:href="@{/courses/biology}">Biology<i class="down-arrow"></i></a></li>
+					</ul>
+					</a>
+				</li>
+
+				<li class="bg-success"><a href="#" th:href="@{/lectures}">Lectures<i class="down-arrow"></i>
+					</a>
+				</li>
+
+				<li class="bg-info"><a href="#" th:href="@{/library}">Library</a></li>
+
+				<li sec:authorize="hasRole('ROLE_ADMIN')" class="bg-dark">
+					<a href="#" th:href="@{/courses/add}">Add Course</a>
+				</li>
+				<li sec:authorize="isAnonymous()" class="bg-dark">
+					<a href="#" th:href="@{/login}">Login</a>
+				</li>
+				<li sec:authorize="isAnonymous()" class="bg-primary">
+					<a href="#" th:href="@{/register}">Register</a>
+				</li>
+				<li sec:authorize="isFullyAuthenticated()" class="bg-primary">
+					<a href="#" th:href="@{/profile}">Profile</a>
+				</li>
+				<li sec:authorize="isFullyAuthenticated()" class="bg-danger">
+					<a href="#" th:href="@{/logout}">Logout</a>
+				</li>
+			</ul>
+		</nav>
+	</header>

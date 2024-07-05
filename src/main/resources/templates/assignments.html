@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--========== head ===========-->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+<!--========== body ===========-->
+<body class="container parent">
+
+  <div th:replace="../fragments/navbar">This content will be gone</div>
+
+    <main class="main">
+
+      <!--div th:if="${var == 'yes'}"> 
+        <div class="row">
+          <div class="col col-md">
+            <h1 class="display-6 text-success">Lectures List</h1>
+            <hr>
+            <div class="">
+              <table class="shadow-sm table table-striped table-bordered table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Id</th>
+                    <th>Lecture Name</th>
+                    <th>Description</th>
+                    <th>Subject</th>
+                    <th>Course Name</th>
+                    <th>Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="lecture: ${lectures}">
+                    <td th:text="${lecture.id}"></td>
+                    <td th:text="${lecture.title}"></td>
+                    <td th:text="${lecture.description}"></td>
+                    <td th:text="${lecture.subject}"></td>
+                    <td th:text="${lecture.name}"></td>
+                    <td th:text="${lecture.link}"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+         </div>
+      </div>
+    </div>
+
+      <div th:unless="${var == 'yes'}"> 
+        <h1 class="display-6 text-danger">You Don't have Permission to View This Page</h1>
+      </div-->
+
+    
+
+      <div sec:authorize = "hasRole('ROLE_SUPERADMIN')" class="row">
+        <div class="col col-md ">
+          <h1 class="mb-4 display-6 text-success"><b>ALL Assignments List</b></h1>
+          <hr>
+          <div class="">
+            <table class="shadow-sm table table-striped table-bordered table-hover">
+              <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Course Name</th>
+                    <th>Subject</th>
+                    <th>Teacher's Email</th>
+                    <th>Assignment Name</th>
+                    <th>Description</th>
+                    
+                    <th>Open Assignment</th>
+                    <!--th>Submit Assignment</th-->
+          
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="assignment: ${assignments}">
+                    <td th:text="${assignment.id}"></td>
+                    <td th:text="${assignment.name}"></td>
+                    <td th:text="${assignment.subject}"></td>
+                    <td th:text="${assignment.email}"></td>
+                    <td th:text="${assignment.title}"></td>
+                    <td th:text="${assignment.description}"></td>
+                    
+                    <td>
+                      <a class="btn btn-sm btn-info d-inline" th:href="@{/courses/assignment/open/{id}(id=${assignment.id})}">Open</a>
+                     
+                    </td>
+
+                    <!--td>
+                      <a sec:authorize = "hasRole('ROLE_USER')" class="btn btn-sm btn-info d-inline" th:href="@{/files/submission/{id}(id=${assignment.id})}">Submit</a>
+                      
+                    </td-->
+            
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+
+       </div>
+       
+    </div>
+
+    <h1 sec:authorize = "hasRole('ROLE_ADMIN')" class="mb-4 display-6 text-danger"><b>You Don't have Permission to View This Page</b></h1>
+    <h1 sec:authorize = "hasRole('ROLE_USER')" class="mb-4 display-6 text-danger"><b>You Don't have Permission to View This Page</b></h1>
+  </main>
+
+  
+
+  <!--========== Footer ===========-->
+  <div sec:authorize = "hasRole('ROLE_SUPERADMIN')" th:replace="../fragments/footer">This content will be gone</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

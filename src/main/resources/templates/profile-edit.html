@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--========== head ===========-->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+
+<!--========== Main Body ===========-->
+<body class="container parent">
+	<!--========== navbar ===========-->
+	    <div th:replace="../fragments/navbar">This content will be gone</div>
+
+      <main class="main">
+
+        <h1 class="mb-4 display-6 text-success p-2"><b>Update Your Profile</b></h1>
+
+        <div class="container">
+      
+          <!-- form 1 -->
+          <form action="#" 
+                th:action="@{/profile-edit}" 
+                th:object="${account}" 
+                id="form1"
+                class="mx-auto w-50 p-5 shadow bg-light rounded" 
+                method="POST">
+            
+            <h2 class="display-6">Please Update</h2>
+
+            <div class="form-group mb-4" hidden>
+              <label for="id">Id</label>
+              <input type="text" name="id" id="id" class="form-control" th:field="*{id}">
+              <!-- <input type="text" name="firstname" id="firstname" class="form-control"> -->
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="firstname">First Name</label>
+              <input type="text" name="firstname" id="firstname" class="form-control" th:field="*{firstName}">
+              <!-- <input type="text" name="firstname" id="firstname" class="form-control"> -->
+            </div>
+      
+            <div class="form-group mb-4">
+              <label for="lastname">Last Name</label>
+              <input type="text" name="lastname" id="lastname" class="form-control" th:field="*{lastName}">
+              <!-- <input type="text" name="lastname" id="lastname" class="form-control"> -->
+            </div>
+            
+            <div class="form-group mb-4">
+              <label for="email">Email</label>
+              <input type="text" name="email" id="email" class="form-control" th:field="*{email}" readonly>
+              <!-- <input type="text" name="email" id="email" class="form-control"> -->
+            </div>
+
+            <div class="form-group mb-4" hidden>
+              <label for="role">Role</label>
+              <input type="text" name="role" id="role" class="form-control" th:field="*{role.name}" readonly>
+              <!-- <input type="text" name="email" id="email" class="form-control"> -->
+            </div>
+      
+            <div class="form-group">
+              <button type="submit" class="btn btn-sm btn-info btn-block form-control">Update Profile</button>
+            </div>
+      
+          </form>
+      
+        </div>
+
+      </main>
+      
+  <!--========== Footer ===========-->
+  <div th:replace="../fragments/footer">This content will be gone</div>
+
+  
+</body>

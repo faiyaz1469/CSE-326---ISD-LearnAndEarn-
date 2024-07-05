@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--========== head ===========-->
+<div th:replace="../fragments/head">This content will be gone</div>
+
+<!--========== body ===========-->
+<body class="container parent">
+    <div th:replace="../fragments/navbar">This content will be gone</div>
+
+    <main class="main">
+
+      <div class="row">
+        <div class="col col-md">
+          <h3 class="display-6 text-primary" ><b>Submitted Assignment List</b></h3>
+          <hr>
+          <div th:if="${subempty == 'yes'}"> 
+            <small><h3 class=" display-6 text-success p-3">No Submissions Yet</h3></small>
+          </div>
+      
+          <div th:unless="${subempty == 'yes'}"> 
+          
+                <div class="">
+                    <table class="shadow-sm table table-striped table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                        <th>Id</th>
+                        <th>First Name</th>              
+                        <th>Email</th>
+                        <th>Assignment Title</th>
+                        <th>Evaluation Status</th>
+                        <th>Given Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="submission: ${submissions}">
+                        <td th:text="${submission.id}"></td>
+                        <td th:text="${submission.firstName}"></td>
+                        
+                        <td th:text="${submission.email}"></td>
+                        <td th:text="${submission.title}"></td>
+                        
+                        <div th:if="${submission.mark == null}"> 
+                          <td>
+                            <a class="btn btn-sm btn-danger d-inline mx-2"><b>Unchecked</b></a>
+                            <a class="btn btn-sm btn-info d-inline" th:href="@{/assignment/submission/view/{id}(id=${submission.id})}">Check</a>
+                          </td>
+                          
+                        </div>
+                        
+                        <div th:unless="${submission.mark == null}"> 
+                          <td>
+                            <a class="btn btn-sm btn-success d-inline mx-2"><b>Checked</b></a>
+                            <a class="btn btn-sm btn-info d-inline" th:href="@{/assignment/submission/view/{id}(id=${submission.id})}">Recheck</a>
+                          </td>
+                        </div>
+                        
+                        <td th:text="${submission.mark}"></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+
+            </div>
+      </div>
+    <main>
+
+      <!--========== Footer ===========-->
+      <!--div th:replace="../fragments/footer">This content will be gone</div-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
